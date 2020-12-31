@@ -1,5 +1,3 @@
-require('dotenv').config();
-const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -30,28 +28,6 @@ app.get('/', (req, res) => {
 	});
 });
 
-app.use((req, res, next) => {
-	const error = new Error('404 Page Not Found');
-	error.status = 404;
-	next(error);
-});
-
-app.use((error, req, res, next) => {
-	console.log(error);
-
-	if (error.status === 404) {
-		return res.status(404).json({
-			msg: error.message,
-			status: 404,
-		});
-	}
-
-	return res.status(500).json({
-		msg: 'Internal Server Error',
-		status: 500,
-	});
-});
-
-app.listen(process.env.PORT, () => {
-	console.log('Server listening on port', process.env.PORT);
+app.listen(8080, () => {
+	console.log('Server listening on port 8080');
 });
